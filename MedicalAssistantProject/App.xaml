@@ -1,0 +1,89 @@
+﻿<Application
+    x:Class="MedicalAssistantProject.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MedicalAssistantProject">
+    <Application.Resources>
+
+        <DataTemplate x:Key="PivotSmall">
+            <ContentPresenter>
+                <TextBlock FontSize="32" Text="{Binding}" Margin="0,20,0,0"/>
+            </ContentPresenter>
+        </DataTemplate>
+
+        <Thickness x:Key="PhoneTouchTargetOverhang">0,9.5</Thickness>
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="Transparent" />
+        <ControlTemplate x:Key="NoAnimation" TargetType="Button">
+            <Grid x:Name="Grid" Background="Transparent">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="PointerOver" />
+                        <VisualState x:Name="Pressed">
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+					Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+                    <ContentPresenter x:Name="ContentPresenter" Foreground="{TemplateBinding Foreground}"
+						HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"
+						Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+						AutomationProperties.AccessibilityView="Raw"/>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+
+
+        <Style x:Key="MainPage" TargetType="Pivot">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Pictures/Backgrounds/mp_bkg.png"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SearchPage" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Pictures/Backgrounds/illnessSrch.png"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CurrentIll" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Pictures/Backgrounds/currill_bkg.png"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CurrentIllS" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Pictures/Backgrounds/currillS_bkg.png"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MedicamentPage" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Pictures/Backgrounds/medi_bkg.png"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DoctorPage" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Pictures/Backgrounds/doc_bkg.png"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>

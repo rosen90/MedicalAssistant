@@ -1,0 +1,390 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MedicalAssistantProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    x:Class="MedicalAssistantProject.MainPage"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--Command Bar Control-->
+    <Page.BottomAppBar>
+        <CommandBar x:Name="StatusBar" ClosedDisplayMode="Minimal">
+            <AppBarButton x:ConnectionId='1' Icon="Help" Label="About"                           />
+            <AppBarButton x:ConnectionId='2' Icon="Favorite" Label="Rate"                      />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+
+    <Grid Margin="0,0,0,0">
+
+        <Pivot x:ConnectionId='3' x:Name="PivotLayout" Title="Медицински асистент" Style="{StaticResource MainPage}"                                                >
+           
+<!-- #################################### Pivot Veiw 1 - Symptoms ############################## -->
+          
+            <PivotItem Header="Симптоми">
+                <Grid Margin="0,0,-0.333,-0.167">
+
+                    <!-- Whole body image -->
+                    <Image x:Name="Body" 
+						Source="/Pictures/HumanBodySelected.png" 
+						HorizontalAlignment="Left"
+						Height="321"
+						Margin="-5,33,0,0" 
+						VerticalAlignment="Top" 
+						Width="170"/>
+
+                    <!-- Head Control -->
+                    <Image x:Name="Head_img" 
+						Source="/Pictures/Head.png" 
+						HorizontalAlignment="Left" 
+						Height="90" 
+						VerticalAlignment="Top" 
+						Width="160" 
+						Margin="-9,34,0,0"/>
+
+                    <Button x:ConnectionId='12' x:Name="HeadClick" 
+						MinWidth="25" 
+						MinHeight="25" 
+						Padding="0" 
+						BorderThickness="0"  
+						Margin="56,32,0,435" 
+						                        
+						Template="{StaticResource NoAnimation}" 
+						Height="47" Width="36"/>
+
+                    <!--Torso Control-->
+                    <Image x:Name="Torso_img" 
+						Source="/Pictures/Torse.png" 
+						HorizontalAlignment="Left" 
+						Height="120" 
+						VerticalAlignment="Top" 
+						Width="161" 
+						Margin="-5,86,0,0"/>
+
+                    <!--Arms Control-->
+                    <Image x:Name ="Arms_img" 
+						Source="/Pictures/Arms.png" 
+						HorizontalAlignment="Left" 
+						Height="170" 
+						VerticalAlignment="Top" 
+						Width="158" 
+						Margin="-4,87,0,0"/>
+
+
+
+                    <!--Legs Control-->
+                    <Image x:Name ="Legs_img" 
+						Source="/Pictures/Legs.png" 
+						HorizontalAlignment="Left" 
+						Height="151" 
+						VerticalAlignment="Top" 
+						Width="160" 
+						Margin="-5,199,0,0"/>
+
+                    <Button x:ConnectionId='13' x:Name="LegsClicked" 
+						MinWidth="25" 
+						Padding="0" 
+						BorderThickness="0" 
+						                          
+						Template="{StaticResource NoAnimation}" 
+						Height="145" Width="61"
+						Margin="46,120,0,93" />
+
+                    <!-- Search Illness Control -->
+                    <Button x:ConnectionId='14' x:Name="SearchBtn"  
+						Content="Търси" 
+						HorizontalAlignment="Center" 
+						Margin="98,0,82,26" 
+						                       
+						VerticalAlignment="Bottom" 
+						Width="182" />
+
+                    <!-- Click sound element-->
+                    <MediaElement x:Name="clickSnd" 
+                                  Source="/Sounds/click.mp3"
+                                   AutoPlay="False">
+                        
+                    </MediaElement>
+
+                    <!-- Static Text of Symptoms -->
+                    <TextBlock x:Name="SympStaticText" 
+						HorizontalAlignment="Right" 
+						Margin="0,35,76,0" 
+						TextWrapping="Wrap" 
+						Text="Симптоми:" 
+						VerticalAlignment="Top" 
+						Width="115" 
+						Height="19" 
+						FontSize="16.333" 
+						Opacity="0.745"/>
+
+                    <!-- Dynamic List of chosen symptoms -->
+                    <ListView x:ConnectionId='15' x:Name="SymptChoices" Padding="0" HorizontalAlignment="Left" Height="152" Margin="170,192,0,0" VerticalAlignment="Top" Width="193"                                                                                       BorderBrush="#FFF9F1F1" BorderThickness="0,2" CharacterSpacing="-5" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,-4,0,-4">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Margin" Value="0,0,0,0"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+
+                                    <TextBlock FontSize="20"
+                                               Margin="0,0,0,10" 
+                                               TextWrapping="Wrap" 
+                                               Text="{Binding symptom_name}" 
+                                               LineStackingStrategy="BaselineToBaseline"
+                                               LineHeight="16" />
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <!-- Double Tap Static Text -->
+                    <TextBlock x:Name="doubleTapText" 
+						HorizontalAlignment="Right" 
+						Margin="0,167,24,0" 
+						TextWrapping="Wrap" 
+						Text="Двоен клик за изчистване" 
+						VerticalAlignment="Top" Width="160" 
+						Height="20" 
+						FontSize="13.25" 
+						Opacity="0.500"/>
+
+                    <!-- Symptoms for chosing -->
+                    <ComboBox x:ConnectionId='16' x:Name="SymptomsComboBox"
+                        ItemsSource="{Binding}"
+						HorizontalAlignment="Right" 
+						Margin="0,49,0,0" 
+						VerticalAlignment="Top" 
+						Width="193"                      
+						PlaceholderText="Избери" 
+						                                            >
+
+                        <!-- Template Start -->
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding symptom_name}" 
+                                    TextWrapping="Wrap" LineStackingStrategy="BaselineToBaseline" LineHeight="20" />
+                                 <!--it will wrap the text--> 
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <!-- Template End -->
+
+                    </ComboBox>
+
+                    <!-- Invisible Button Left Arm -->
+                    <Button x:ConnectionId='17' x:Name="ArmsClicked" 
+						MinWidth="25" 
+						Padding="0" 
+						BorderThickness="0"  
+						                          
+						Template="{StaticResource NoAnimation}" 
+						Height="137" 
+						Margin="0,45,0,250" 
+						Width="46"/>
+
+                    <!-- Invisible Button Right Hand -->
+                    <Button x:ConnectionId='18' x:Name="ArmsClicked2" 
+						MinWidth="25" 
+						Padding="0" 
+						BorderThickness="0"  
+						                          
+						Template="{StaticResource NoAnimation}" 
+						Height="137" Width="37"
+						Margin="107,48,0,251" />
+
+                    <!-- Torse invisible button -->
+                    <Button x:ConnectionId='19' x:Name="TorsoClicked" 
+						MinWidth="25" 
+						Padding="0" 
+						BorderThickness="0"   
+						                           
+						Template="{StaticResource NoAnimation}" 
+						Height="112" Width="61"
+						Margin="46,10,0,245" />
+
+
+                </Grid>
+            </PivotItem>
+
+<!-- #################################### Pivot Veiw 2 - Doctors ############################## -->
+            <PivotItem Header="Лекари">
+
+                <StackPanel>
+
+                    <!-- Doctors Search Box -->
+                    <TextBox x:ConnectionId='10' x:Name="SearchBox" 
+						HorizontalAlignment="Left" 
+						Margin="0,-1,0,0" 
+						TextWrapping="Wrap" 
+						Text="" 
+						VerticalAlignment="Top" 
+						Width="352" 
+						Height="40" 
+						Background="{x:Null}" 
+						Foreground="#FFB2A4A4" 
+						PlaceholderText="Търсене..."
+						                                       />
+
+                    <!-- Doctors Search Result List -->
+                    <ListView x:ConnectionId='11' x:Name="DoctorList" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="483" Margin="6,0,0,0" VerticalAlignment="Top" Width="342" FontSize="21.333" BorderThickness="0"                                  IsItemClickEnabled="True" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,-4,0,-4">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Margin" Value="0,0,0,0" />
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <TextBlock x:Name="TextBname" Margin="0,25,0,0" FontSize="22" Text="{Binding doctor_prof_name}" />
+                                    <TextBlock FontSize="15" Text="{Binding type_name}" Opacity="30" Margin="0, 0, 0 ,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </StackPanel>
+
+            </PivotItem>
+
+<!-- #################################### Pivot Veiw 3 - Illnesses ############################## -->
+            <PivotItem Header="Болести">
+
+                <StackPanel>
+                    
+                    <!-- Illness Search Box -->
+                    <TextBox x:ConnectionId='8' x:Name="SearchBoxIll" 
+						HorizontalAlignment="Left" 
+						Margin="0,-1,0,0" 
+						TextWrapping="Wrap" 
+						Text="" 
+						VerticalAlignment="Top" 
+						Width="352" 
+						Height="40" 
+						Background="{x:Null}" 
+						Foreground="#FFB2A4A4" 
+						PlaceholderText="Търсене..."
+						                                         />
+
+                    <!-- Illness Search Result List -->
+                    <ListView x:ConnectionId='9' x:Name="IllnessList" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="483" Margin="6,0,0,0" VerticalAlignment="Top" Width="342" FontSize="21.333" BorderThickness="0"                                   IsItemClickEnabled="True" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,-4,0,-4">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Margin" Value="0,0,0,0" />
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <TextBlock x:Name="TextBname" TextWrapping="Wrap" Margin="0,25,0,0" FontSize="22" Text="{Binding illness_name}" />
+                                    <TextBlock FontSize="15" Text="{Binding type_name}" Opacity="30" Margin="0, 0, 0 ,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </StackPanel>
+            </PivotItem>
+
+<!-- #################################### Pivot Veiw 4 - Medicaments ############################## -->
+            <PivotItem Header="Медикаменти">
+
+                <StackPanel>
+
+                    <!-- Medicament Search Box -->
+                    <TextBox x:ConnectionId='6' x:Name="SearchBoxMed" 
+						HorizontalAlignment="Left" 
+						Margin="0,-1,0,0" 
+						TextWrapping="Wrap" 
+						Text="" 
+						VerticalAlignment="Top" 
+						Width="352" 
+						Height="40" 
+						Background="{x:Null}" 
+						Foreground="#FFB2A4A4" 
+						PlaceholderText="Търсене..."
+						                                         />
+
+                    <!-- Medicament Search Result List -->
+                    <ListView x:ConnectionId='7' x:Name="MedList" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="483" Margin="6,0,0,0" VerticalAlignment="Top" Width="342" FontSize="21.333" BorderThickness="0"                               IsItemClickEnabled="True" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,-4,0,-4">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Margin" Value="0,0,0,0" />
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <TextBlock x:Name="TextBname" Margin="0,25,0,0" FontSize="22" Text="{Binding med_name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </StackPanel>
+
+            </PivotItem>
+
+<!-- #################################### Pivot Veiw 5 - NearYou ############################## -->
+            <PivotItem x:Name="NearYouTab" Header="Близо до Вас">
+              
+                <ScrollViewer Name="scrollViewer" Width="440"  Margin="-20,0,-20,0">
+                    <StackPanel Name="stackMap">
+
+                        <!-- Map with all hospitals around you -->
+                        <Maps:MapControl x:Name="MainMap" 
+                                     MapServiceToken="AuQrJsUO_lfjBItbttjlm73Tnnmmu0FiJi7AJoT3md3IE-Ia_vs3Argzs_WbP67N"
+                                     VerticalAlignment="Top" HorizontalAlignment="Center" Width="440"  Height="350" >
+                        </Maps:MapControl>
+
+                        <!-- Dynamic List view with hospitals -->
+                        <ListView x:ConnectionId='4' x:Name="Hospitals" Width="440" Height="155" ItemsSource="{Binding}" HorizontalAlignment="Left" BorderBrush="#FFFFFDFD" BorderThickness="0,2" Background="#FF494949"                                 IsItemClickEnabled="True" SelectionMode="Single">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Margin" Value="0,0,0,0" />
+                                            </Style>
+                                        </StackPanel.Resources>
+
+                                        <!-- ListView Item -->
+                                        <TextBlock FontSize="21.333"
+                                                   TextWrapping="Wrap"
+                                                   Text="{Binding hospital_name}" 
+                                                   Margin="10,10,0,10" 
+                                                   Foreground="White" 
+                                                   FontWeight="Normal" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                        <!-- Temporary navigate button -->
+                        <Button x:ConnectionId='5' x:Name="NavigateBtn" 
+                                Margin="-35,-5,0,0" 
+                                Content="Упътване"
+                                MinHeight="15"
+                                                       
+                                HorizontalAlignment="Center"
+                                Width="394"
+                                Height="52">
+                        </Button>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+
+        </Pivot>
+
+    </Grid>
+
+</Page>
+

@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="MedicalAssistantProject.CurrentIllnesSympt"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MedicalAssistantProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="LayoutRoot" Style="{StaticResource CurrentIllS}">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="Медицински асистент" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock x:Name="SympIllnes" 
+                       TextWrapping="Wrap"
+                       Text="Симптоми на"
+                       Margin="0,10.5,0.111,26.5" 
+                       Style="{ThemeResource HeaderTextBlockStyle}" 
+                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" 
+                       FontSize="32"
+                       LineStackingStrategy="BaselineToBaseline"
+                       LineHeight="32"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+
+            <!-- Illness Result List -->
+            <ListView x:Name="SymptomList" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="370" Margin="10,4,0,0" VerticalAlignment="Top" Width="342" FontSize="21.333" BorderThickness="0" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,-4,0,-4">
+                            <StackPanel.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Margin" Value="0,0,0,0" />
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock x:Name="TextBname" Margin="0,0,0,15" TextWrapping="Wrap" FontSize="24" Text="{Binding symptom_name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock x:Name="Note" 
+                       HorizontalAlignment="Left"
+                       Margin="10,391,0,0" 
+                       TextWrapping="Wrap" 
+                       Text="*ЗАБЕЛЕЖКА: Възможно е симптомите на болестта да се препокриват със симптомите на друга болест. НЕ правете собсвтени заключения, а непременно потърсете помощта на предложените медицински специалисти." 
+                       VerticalAlignment="Top"
+                       Foreground="Red"
+                       TextAlignment="Justify"
+                       FontSize="16"
+                       Height="159" Width="342" FontStyle="Italic" />
+
+
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,207 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MedicalAssistantProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    x:Class="MedicalAssistantProject.DoctorPage"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--Command Bar Control-->
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton x:ConnectionId='1' Icon="Help" Label="About"                           />
+            <AppBarButton x:ConnectionId='2' Icon="Favorite" Label="Rate"                      />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="LayoutRoot" Style="{StaticResource DoctorPage}">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,0,0,0">
+
+            <Pivot Title="Медицински асистент" HeaderTemplate="{StaticResource PivotSmall}">
+                <PivotItem x:Name="DoctorName" Margin="0,15.5,0,0" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}">
+                    <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+
+                        <!-- Doctor Portrait Picture -->
+                        <Image x:Name="DocPortrait"  
+                               HorizontalAlignment="Left" 
+                               Height="197" 
+                               Margin="7,-6,0,0" 
+                               VerticalAlignment="Top" 
+                               Width="153" />
+
+                        <!-- Contact Static Text -->
+                        <TextBlock x:Name="ContantStaticText" 
+                                   HorizontalAlignment="Left" 
+                                   Margin="175,2,0,0" 
+                                   TextWrapping="Wrap" 
+                                   Text="Контакти: " 
+                                   VerticalAlignment="Top"
+                                   FontSize="32" 
+                                   FontWeight="Bold"/>
+
+                        <!-- Telephone Static Text-->
+                        <TextBlock x:Name="TelStaticText" 
+                                   HorizontalAlignment="Left" 
+                                   Margin="174,44,0,0" 
+                                   TextWrapping="Wrap" 
+                                   Text="Телефон: " 
+                                   VerticalAlignment="Top" 
+                                   FontSize="18.667"/>
+
+                        <!-- Dynamic Telephone Number-->
+                        <Button x:ConnectionId='3' x:Name="CallPhone" 
+                                MinHeight="15" 
+                                HorizontalAlignment="Left" 
+                                                     
+                                Margin="152,54,0,0" 
+                                VerticalAlignment="Top" 
+                                Height="42" 
+                                BorderThickness="0" 
+                                Width="150" 
+                                FontSize="16" 
+                                Foreground="#158BBF"/>
+
+                        <!--Static Email Text-->
+                        <TextBlock x:Name="EmailStaticText" 
+                                   HorizontalAlignment="Left"
+                                   Margin="174,94,0,0" 
+                                   TextWrapping="Wrap" 
+                                   Text="E-mail:" 
+                                   VerticalAlignment="Top" 
+                                   FontSize="18.667"
+                                   Width="76"/>
+
+
+                        <!--Dynamic Email Text-->
+                        <TextBlock x:Name="EmailDynamicText" 
+                                   HorizontalAlignment="Left"
+                                   Margin="173,114,-23,0" 
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Top" 
+                                   FontSize="18.667"
+                                   Width="212" 
+                                   Height="24"
+                                   Foreground="#158BBF"/>
+
+                        <!-- Send Email Address -->
+                        <Button x:ConnectionId='4' x:Name="SendEmail" 
+                                MinHeight="15" 
+                                HorizontalAlignment="Left" 
+                                                        
+                                Margin="175,104,0,0" 
+                                VerticalAlignment="Top" 
+                                Height="45" 
+                                BorderThickness="0" 
+                                Width="183" 
+                                FontSize="16" 
+                                Foreground="#158BBF"
+                                Template="{StaticResource NoAnimation}"/>
+
+                        <!-- Static DoctorType Text-->
+                        <TextBlock x:Name="DoctorTypeStaticText" 
+                                   HorizontalAlignment="Left" 
+                                   Margin="175,143,0,0" 
+                                   TextWrapping="Wrap" 
+                                   Text="Тип:" 
+                                   VerticalAlignment="Top" 
+                                   FontSize="18.667"/>
+
+                        <!--Dynamic Doctor type Text-->
+                        <TextBlock x:Name="DoctorType" 
+                                   HorizontalAlignment="Left" 
+                                   Margin="176,171,0,0" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   FontSize="16" 
+                                   Foreground="#158BBF"
+                                   Width="170"/>
+
+                        <!-- Send feedback invisible button -->
+                        <Button x:ConnectionId='5' x:Name="ShowCategoryBtn"
+                            MinHeight="10"
+                            BorderThickness="0"
+                            Template="{StaticResource NoAnimation}"
+                                                         
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Margin="176,171,0,0" 
+                            Width="170"
+                            Height="19"/>
+
+                        <Rectangle Fill="#FF4598B8" 
+                                   HorizontalAlignment="Left" 
+                                   Height="67" 
+                                   Margin="-20,206,-23,0" 
+                                   Stroke="Black" 
+                                   VerticalAlignment="Top" 
+                                   Width="406"/>
+
+                        <!--Dynamic Address Text-->
+                        <TextBlock x:Name="ShowAdress" 
+                                   HorizontalAlignment="Stretch"
+                                   Margin="0,218,0,0" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   FontSize="18.667" 
+                                   Foreground="White" 
+                                   Height="43"/>
+
+
+                        <!--Navigation Map Control -->
+                        <Maps:MapControl x:Name="DocLocation" 
+                                         HorizontalAlignment="Left" 
+                                         Margin="-20,271,-23,0"
+                                         VerticalAlignment="Top" 
+                                         Height="281" 
+                                         Width="405"
+                                         MapServiceToken="AuQrJsUO_lfjBItbttjlm73Tnnmmu0FiJi7AJoT3md3IE-Ia_vs3Argzs_WbP67N"
+                                         />
+
+                        <Button x:ConnectionId='6' x:Name="NavButton" 
+                                HorizontalAlignment="Left"
+                                Margin="-20,196,-23,0" 
+                                VerticalAlignment="Top" 
+                                Height="84" 
+                                Width="405"
+                                BorderThickness="0"
+                                Template="{StaticResource NoAnimation}"
+                                                       />
+
+                    </Grid>
+                </PivotItem>
+                <PivotItem Header="Биография">
+
+                    <!--DoctorBio Dynamic text-->
+                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Height="545" Margin="0,-15,0.222,21.444">
+                        <StackPanel>
+                            <TextBlock x:Name="DoctorBio" 
+                               HorizontalAlignment="Left"  
+                               TextWrapping="Wrap" 
+                               VerticalAlignment="Top" 
+                               Width="360" 
+                               FontSize="18.667"/>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </PivotItem>
+            </Pivot>
+
+        </Grid>
+    </Grid>
+</Page>
+

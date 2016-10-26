@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="MedicalAssistantProject.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MedicalAssistantProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot Title="Медицински асистент">
+            <PivotItem Header="Симптоми">
+                <Grid Margin="0,0,-0.333,-0.167">
+                    <Image x:Name="image" Source="/Pictures/HumanBody.png" HorizontalAlignment="Left" Height="334" Margin="0,10,0,0" VerticalAlignment="Top" Width="165"/>
+                    <Button x:Name="button" Content="Търси" HorizontalAlignment="Center" Margin="98,0,82,26" VerticalAlignment="Bottom" Width="182"/>
+                    <ComboBox x:ConnectionId='1' x:Name="comboBox" HorizontalAlignment="Right" Margin="0,49,10,0" VerticalAlignment="Top" Width="160" PlaceholderText="Избери"                                             />
+                    <TextBlock x:Name="textBlock" HorizontalAlignment="Right" Margin="0,35,55,0" TextWrapping="Wrap" Text="Симптоми:" VerticalAlignment="Top" Width="115" Height="19" FontSize="16.333" Opacity="0.745"/>
+                    <ListView x:ConnectionId='2' x:Name="listView" Padding="0" HorizontalAlignment="Left" Height="152" Margin="192,192,0,0" VerticalAlignment="Top" Width="160"                                      BorderBrush="#FFF9F1F1" BorderThickness="0,2" CharacterSpacing="-5" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,-4,0,-4">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Margin" Value="0,0,0,0" />
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <TextBlock FontSize="20" Text="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock x:Name="doubleTapText" HorizontalAlignment="Right" Margin="0,167,10,0" TextWrapping="Wrap" Text="Двоен клик за изчистване" VerticalAlignment="Top" Width="160" Height="10" FontSize="10.25" Opacity="0.500"/>
+
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="Лекари">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="Болести">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="Медикаменти">
+                <Grid/>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
+

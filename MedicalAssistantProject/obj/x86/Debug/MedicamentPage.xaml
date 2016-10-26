@@ -1,0 +1,150 @@
+﻿<Page
+    x:Class="MedicalAssistantProject.MedicamentPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MedicalAssistantProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--Command Bar Control-->
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton x:ConnectionId='1' Icon="Help" Label="About"                           />
+            <AppBarButton x:ConnectionId='2' Icon="Favorite" Label="Rate"                      />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="LayoutRoot" Style="{StaticResource MedicamentPage}">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,0,0,0">
+
+            <Pivot Title="Медицински асистент" HeaderTemplate="{StaticResource PivotSmall}">
+                <PivotItem x:Name="MedName" Margin="0,15.5,0,0" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}">
+                    <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,15.5,19,0" Height="528">
+
+                        <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Height="545" Margin="0,-15,0.222,21.444">
+                            <StackPanel>
+                                
+                                <!-- Medicament name and description -->
+                                <TextBlock x:Name="Description" 
+                                   HorizontalAlignment="Left" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   Width="362" 
+                                   FontSize="18.667"/>
+                                
+                            </StackPanel>
+                        </ScrollViewer>
+                        
+                    </Grid>
+                </PivotItem>
+
+                <PivotItem Header="Преди да използвате">
+   
+                        <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Height="545" Margin="0,-15,0.222,21.444">
+                            <StackPanel>
+                                
+                                <!-- Before use the medicament -->
+                                <TextBlock x:Name="Before_use" 
+                                   HorizontalAlignment="Left" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   Width="362" 
+                                   FontSize="18.667"/>
+
+                            </StackPanel>
+                        </ScrollViewer>
+
+                </PivotItem>
+
+                <PivotItem Header="Как да използвате">
+
+                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Height="545" Margin="0,-15,0.222,21.444">
+                        <StackPanel>
+                            
+                            <!-- How to use the medicament -->
+                            <TextBlock x:Name="How_to_use" 
+                                   HorizontalAlignment="Left" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   Width="362" 
+                                   FontSize="18.667"/>
+
+                        </StackPanel>
+                        
+                    </ScrollViewer>
+
+                </PivotItem>
+
+                <PivotItem Header="Нежелани реакции">
+
+                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Height="545" Margin="0,-15,0.222,21.444">
+                        <StackPanel>
+                                
+                            <!-- Medicament side effect -->
+                            <TextBlock x:Name="Side_effects" 
+                                   HorizontalAlignment="Left" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   Width="362" 
+                                   FontSize="18.667"/>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </PivotItem>
+
+                <PivotItem Header="Как да съхранявате">
+
+                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Height="545" Margin="0,-15,0.222,21.444">
+                        <StackPanel>
+                            
+                            <!-- How to storage the medicament -->
+                            <TextBlock x:Name="How_to_storage" 
+                                   HorizontalAlignment="Left" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   Width="362" 
+                                   FontSize="18.667"/>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </PivotItem>
+
+                <PivotItem Header="Допълнителна информация">
+
+                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Height="545" Margin="0,-15,0.222,21.444">
+                        <StackPanel>
+                            
+                            <!-- Medicament Additional Info -->
+                            <TextBlock x:Name="Additional_info" 
+                                   HorizontalAlignment="Left" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   Width="362" 
+                                   FontSize="18.667"/>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </PivotItem>
+            </Pivot>
+
+        </Grid>
+    </Grid>
+</Page>
+

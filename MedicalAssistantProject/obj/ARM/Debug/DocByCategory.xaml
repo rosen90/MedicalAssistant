@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="MedicalAssistantProject.DocByCategory"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MedicalAssistantProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--Command Bar Control-->
+    <Page.BottomAppBar>
+        <CommandBar x:Name="StatusBar" ClosedDisplayMode="Minimal">
+            <AppBarButton x:ConnectionId='1' Icon="Help" Label="About"                           />
+            <AppBarButton x:ConnectionId='2' Icon="Favorite" Label="Rate"                      />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="Медицински астистент" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock x:Name="Category" Text="" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+
+            <StackPanel>
+
+                 <!--Doctors Search Box--> 
+                <TextBox x:ConnectionId='3' x:Name="SearchBox" 
+						HorizontalAlignment="Left" 
+						Margin="0,-1,0,0" 
+						TextWrapping="Wrap" 
+						Text="" 
+						VerticalAlignment="Top" 
+						Width="352" 
+						Height="40" 
+						Background="{x:Null}" 
+						Foreground="#FFB2A4A4" 
+						PlaceholderText="Търсене..."
+						                                       />
+
+                <!-- Doctors Search Result List -->
+                <ListView x:ConnectionId='4' x:Name="DoctorsByCategory" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="483" Margin="6,0,0,0" VerticalAlignment="Top" Width="342" FontSize="21.333" BorderThickness="0"                                         IsItemClickEnabled="True" SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,-4,0,-4">
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="0,0,0,0" />
+                                    </Style>
+                                </StackPanel.Resources>
+                                <TextBlock x:Name="TextBname" Margin="0,25,0,0" FontSize="22" Text="{Binding doctor_prof_name}" />
+                                <TextBlock FontSize="15" Text="{Binding type_name}" Opacity="30" Margin="0, 0, 0 ,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Page>
+

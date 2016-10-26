@@ -1,0 +1,109 @@
+﻿<Page
+    x:Class="MedicalAssistantProject.CurrentIllness"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MedicalAssistantProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--Command Bar Control-->
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton Icon="Help" Label="About" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Favorite" Label="Rate" Click="RateApp_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="LayoutRoot" Style="{StaticResource CurrentIll}">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="Медицински асистент" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock x:Name="IllnessName" Margin="0,10,0,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <TextBlock x:Name="DescriptionStaticText" Margin="0,10,0,0"  Text="Описание:" FontSize="32" FontFamily="Segoe WP" />
+
+            <!-- Illness Description-->
+            <ScrollViewer Name="scroll_1" Height="479" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <StackPanel x:Name="ContentRoot" Margin="0,10,10,0">
+
+                    <StackPanel>
+                        <ScrollViewer Name="scroll_2" Height="440" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,0,0.111,0">
+
+                            <!-- Illness Description Dynamic Text -->
+                            <TextBlock x:Name="IllDescription" 
+                                   Margin="0,10,0,10" 
+                                   HorizontalAlignment="Left" 
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Top" 
+                                   Width="342" 
+                                   FontSize="18.667" />
+
+                        </ScrollViewer>
+
+                        <!-- Read more hyperlink button -->
+                        <HyperlinkButton x:Name="ReadMore" 
+                                         Content="Прочети още"
+                                         FontSize="18.667" 
+                                         Foreground="#158BBF" />
+
+                        <!-- Area Experts Static Title Text -->
+                        <TextBlock FontSize="28" 
+                                   Text="Специалисти в областта: " 
+                                   Margin="0,20,0,20" 
+                                   FontWeight="Bold" />
+
+                        <!-- Dynamic Experts Result List -->
+                        <ListView x:Name="Doctors" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="152"  VerticalAlignment="Top" Width="350" BorderBrush="#FFFFFDFD" BorderThickness="0,2" Background="#FF494949" ItemClick="Doctors_ItemClick"  IsItemClickEnabled="True" SelectionMode="Single">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,-4,0,-4">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Margin" Value="0,0,0,0" />
+                                            </Style>
+                                        </StackPanel.Resources>
+
+                                        <!-- ListView Item -->
+                                        <TextBlock FontSize="21.333" 
+                                                   Text="{Binding doctor_prof_name}" 
+                                                   Margin="10,10,0,10" 
+                                                   Foreground="White" 
+                                                   FontWeight="Normal" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+        
+        <!--Symptoms for Current Illness --> 
+        <HyperlinkButton 
+            x:Name="SympButton"
+            Content="Симптоми"
+            Foreground="#158BBF" 
+            HorizontalAlignment="Left" 
+            Margin="210,129,0,0"
+            VerticalAlignment="Top"
+            Click="HyperlinkButton_Click"/>
+
+    </Grid>
+</Page>
+
+    

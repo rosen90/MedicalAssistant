@@ -1,0 +1,7 @@
+<XamlCompilerSaveState>
+  <ReferenceAssemblyList>
+    <LocalAssembly PathName="c:\users\karad\documents\visual studio 2015\projects\medicalassistantproject\medicalassistantproject\obj\x86\debug\intermediatexaml\medicalassistantproject.exe" HashGuid="52ab95ef-7db9-10ca-9265-252275382857" />
+    <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\microsoft.vclibs\12.0\references\commonconfiguration\neutral\platform.winmd" HashGuid="58b6b6d1-928e-9908-9804-eb460e5e101b" />
+    <ReferenceAssembly PathName="c:\users\karad\onedrive\documents\visual studio 2015\projects\medicalassistantproject\packages\sqlite.core.windowsphone.2016.04.18.1\lib\wpa81-hidden\x86\sqlite.core.winmd" HashGuid="a2a59da6-0335-c907-9ae5-91e2cd0b0acd" />
+  </ReferenceAssemblyList>
+</XamlCompilerSaveState>
